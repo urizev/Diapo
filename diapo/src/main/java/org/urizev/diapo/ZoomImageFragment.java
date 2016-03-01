@@ -16,7 +16,7 @@ import org.urizev.diapo.view.ZoomImageView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * Created by jcvallejo on 5/11/15.
+ * Created by jcvallejo at 5/11/15.
  */
 public class ZoomImageFragment extends Fragment implements Callback {
     private static final String EXTRA_IMAGE_URL = "url";
