@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import org.urizev.diapo.view.ZoomImageView;
 
@@ -22,11 +23,13 @@ public class ZoomImageFragment extends Fragment implements Callback {
     private ZoomImageView mZoomImage;
     private PhotoViewAttacher mAttacher;
 
-    public static Fragment newInstance(String url) {
+    public static Fragment newInstance(String url, int width, int height) {
         Fragment fragment = new ZoomImageFragment();
 
         Bundle args = new Bundle();
         args.putString(EXTRA_IMAGE_URL, url);
+        args.putInt(Diapo.EXTRA_WIDTH, width);
+        args.putInt(Diapo.EXTRA_HEIGHT, height);
         fragment.setArguments(args);
 
         return fragment;
@@ -46,19 +49,21 @@ public class ZoomImageFragment extends Fragment implements Callback {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        int w = getResources().getDisplayMetrics().widthPixels;
-        int h = getResources().getDisplayMetrics().heightPixels;
+        int w = getArguments().getInt(Diapo.EXTRA_WIDTH);
+        int h = getArguments().getInt(Diapo.EXTRA_HEIGHT);
         String url = getArguments().getString(EXTRA_IMAGE_URL);
-        Picasso.with(getActivity())
-                .load(url)
-                .resize(w, 0)
-                .into(this.mZoomImage, this);
+        RequestCreator creator = Picasso.with(getActivity()).load(url);
+        if (w != 0 || h != 0) {
+            creator.resize(w, h);
+        }
+        creator.into(this.mZoomImage, this);
     }
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mAttacher.cleanup();
+
+        super.onDestroyView();
     }
 
     @Override

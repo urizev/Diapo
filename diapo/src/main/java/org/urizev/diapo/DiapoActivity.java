@@ -3,8 +3,6 @@ package org.urizev.diapo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import org.urizev.diapo.DiapoFragment;
-
 import java.util.ArrayList;
 
 /**
@@ -15,11 +13,13 @@ public class DiapoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<String> urls = getIntent().getStringArrayListExtra(DiapoFragment.EXTRA_IMAGE_URLS);
-        int index = getIntent().getIntExtra(DiapoFragment.EXTRA_IMAGE_INDEX, -1);
+        ArrayList<String> urls = getIntent().getStringArrayListExtra(Diapo.EXTRA_IMAGE_URLS);
+        int index = getIntent().getIntExtra(Diapo.EXTRA_IMAGE_INDEX, -1);
+        int width = getIntent().getIntExtra(Diapo.EXTRA_WIDTH, 0);
+        int heigth = getIntent().getIntExtra(Diapo.EXTRA_HEIGHT, 0);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(android.R.id.content, DiapoFragment.newInstance(urls, index))
+                    .add(android.R.id.content, DiapoFragment.newInstance(urls, index, width, heigth))
                     .commit();
         }
     }

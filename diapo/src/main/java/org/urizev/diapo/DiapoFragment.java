@@ -12,25 +12,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by jcvallejo on 5/11/15.
  */
 public class DiapoFragment extends DialogFragment {
-    public static final String EXTRA_IMAGE_URLS = "imageUrls";
-    public static final String EXTRA_IMAGE_INDEX = "imageIndex";
 
     private ViewPager mPager;
     private DiapoPagerAdapter mAdapter;
     private ArrayList<String> mUrls;
+    private int mWidth;
+    private int mHeight;
 
-    public static Fragment newInstance (ArrayList<String> urls, int index) {
+    public static Fragment newInstance(ArrayList<String> urls, int index, int width, int heigth) {
         Fragment fragment = new DiapoFragment();
 
         Bundle args = new Bundle();
-        args.putStringArrayList(EXTRA_IMAGE_URLS, urls);
-        args.putInt(EXTRA_IMAGE_INDEX, index);
+        args.putStringArrayList(Diapo.EXTRA_IMAGE_URLS, urls);
+        args.putInt(Diapo.EXTRA_IMAGE_INDEX, index);
+        args.putInt(Diapo.EXTRA_WIDTH, width);
+        args.putInt(Diapo.EXTRA_HEIGHT, heigth);
+
         fragment.setArguments(args);
 
         return fragment;
@@ -40,7 +42,9 @@ public class DiapoFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mUrls = getArguments().getStringArrayList(EXTRA_IMAGE_URLS);
+        mUrls = getArguments().getStringArrayList(Diapo.EXTRA_IMAGE_URLS);
+        mWidth = getArguments().getInt(Diapo.EXTRA_WIDTH, 0);
+        mHeight = getArguments().getInt(Diapo.EXTRA_HEIGHT, 0);
     }
 
     @Nullable
@@ -64,7 +68,7 @@ public class DiapoFragment extends DialogFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return ZoomImageFragment.newInstance (mUrls.get(position));
+            return ZoomImageFragment.newInstance (mUrls.get(position), mWidth, mHeight);
         }
 
         @Override

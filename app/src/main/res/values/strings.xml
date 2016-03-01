@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DiapoTest</string>
+    <string name="slideshow">Slideshow</string>
 </resources>
