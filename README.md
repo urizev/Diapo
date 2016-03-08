@@ -46,6 +46,14 @@ intent.putExtra(Diapo.EXTRA_IMAGE_INDEX, index);
 context.startActivity(intent);
 ```
 
+Finally, add this to your `AndroidManifest.xml`.
+
+```xml
+<activity android:name="org.urizev.diapo.DiapoActivity"
+          android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+```
+
 ---
 
 # What's new
