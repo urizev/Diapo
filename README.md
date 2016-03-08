@@ -31,6 +31,29 @@ dependencies {
 
 ---
 
+# Basic usage
+
+Here's a basic example that launches a slideshow with .
+
+```java
+
+int index;
+ArrayList<String> urls;
+
+Intent intent = new Intent(context.getActivity(), DiapoActivity.class);
+intent.putExtra(Diapo.EXTRA_IMAGE_URLS, urls);
+intent.putExtra(Diapo.EXTRA_IMAGE_INDEX, index);
+context.startActivity(intent);
+```
+
+---
+
+# What's new
+
+TBC
+
+---
+
 # Sample Project
 
 You can download the latest sample APK from Google Play
@@ -42,4 +65,3 @@ You can download the latest sample APK from Google Play
 
 Having the sample project installed is a good way to be notified of new releases. Although Watching this 
 repository will allow GitHub to email you whenever I publish a release.
-
