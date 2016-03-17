@@ -15,10 +15,12 @@ public class DiapoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int flags = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        int flags = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            flags |= View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            flags |= View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            flags |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_FULLSCREEN;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -26,8 +28,10 @@ public class DiapoActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         }
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(flags);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(flags);
+        }
 
         ArrayList<String> urls = getIntent().getStringArrayListExtra(Diapo.EXTRA_IMAGE_URLS);
         int index = getIntent().getIntExtra(Diapo.EXTRA_IMAGE_INDEX, -1);

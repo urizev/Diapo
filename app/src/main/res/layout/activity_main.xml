@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="org.urizev.diapotest.MainActivity">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/cell_image"/>
+
 </FrameLayout>
